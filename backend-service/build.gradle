@@ -1,0 +1,72 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+application {
+    mainClassName = System.getProperty("mainClass")
+}
+
+dependencies {
+	// Quarkus Platform
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+	
+	// Dependency Injection (CDI 2.0)
+	implementation 'io.quarkus:quarkus-arc'
+	
+	// REST API (JAX-RS 2.1)
+    implementation 'io.quarkus:quarkus-resteasy'
+    implementation 'io.quarkus:quarkus-resteasy-jsonb'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+	
+	// Database ORM with Repository Pattern (JPA 2.2)
+    // https://quarkus.io/guides/datasource
+//	implementation 'io.quarkus:quarkus-hibernate-orm-panache'
+//	implementation 'io.quarkus:quarkus-jdbc-mssql'
+//	implementation 'io.quarkus:quarkus-jdbc-h2'
+
+    // Security
+    // https://quarkus.io/guides/security-keycloak-authorization
+    implementation 'io.quarkus:quarkus-oidc'
+	implementation 'io.quarkus:quarkus-keycloak-authorization'
+//	implementation 'io.quarkus:quarkus-elytron-security-jdbc'
+//	implementation 'io.quarkus:quarkus-smallrye-jwt'
+//	implementation 'io.quarkus:quarkus-smallrye-jwt-build'
+    // https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt
+//	implementation 'com.nimbusds:nimbus-jose-jwt:9.14'
+    // https://mvnrepository.com/artifact/com.auth0/java-jwt
+//	implementation 'com.auth0:java-jwt:3.18.2'
+
+    // Micrometer
+//	implementation 'io.quarkus:quarkus-micrometer'
+	
+	// Logging
+    implementation 'org.jboss.slf4j:slf4j-jboss-logmanager'
+
+    // Unit Testing
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+group 'br.gov.sc.ciasc'
+version '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}
