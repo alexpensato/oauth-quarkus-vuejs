@@ -30,7 +30,7 @@ public class ProtectedResource {
   @Path("/secretMessage")
   @NoCache
   public SecretMessage secretMessage() {
-    return new SecretMessage("This is a secret message available only to authenticated users.");
+    return new SecretMessage("Esta mensagem segura só é visível para usuários autenticados!");
   }
 
   public class SecretMessage {
